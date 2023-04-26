@@ -5,14 +5,19 @@
  * Author : moham
  */ 
 
-#include <avr/io.h>
 
+#include "APP/APP.h"
 
 int main(void)
 {
-    /* Replace with your application code */
-    while (1) 
+ app_Init();
+    while (1)
     {
+	
+		
+	app_Start();
+		
+		
     }
 }
 

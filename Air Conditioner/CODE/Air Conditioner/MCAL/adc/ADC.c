@@ -7,7 +7,7 @@
 
 
 #include "ADC.h"
-
+/*
 
 void ADC_init(void)
 {
@@ -53,3 +53,4 @@ uint16_t ADC_Read(void)
  
  return ADCLH;	
 }
+*/

@@ -12,21 +12,20 @@
 /*************************************************/
 //					INCLUDES
 /**************************************************/
-#include "../../MCAL/DIO DRIVER/dio.h"
-#include "../../Utilities/types.h"
-
+#include "../../MCAL/dio/DIO.h"
+#include "../../SERVICE/STD_TYPES.h"
+#include <util/delay.h>
 /*************************************************/
 //					CONFIGURATIONS
 /**************************************************/
 
-//KEYPAD PORT
-#define KEYPAD_PORT  PORT_A
+
 
 // PINS
-#define FIRST_ROW_PIN				PIN_0
-#define LAST_ROW_PIN				PIN_3
-#define FIRST_COL_PIN				PIN_4
-#define LAST_COL_PIN				PIN_7
+#define FIRST_ROW_PIN				pina0
+#define LAST_ROW_PIN				pina2
+#define FIRST_COL_PIN				pina3
+#define LAST_COL_PIN				pina5
 
 /**** KEYPAD DATA ******/
 
@@ -61,7 +60,7 @@
 
 
 typedef enum {
-	COL_0 = 4,
+	COL_0 = FIRST_COL_PIN,
 	COL_1,
 	COL_2,
 	COL_3,

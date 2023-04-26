@@ -2,9 +2,10 @@
 
 #ifndef LCD_H_
 #define LCD_H_
+
 #include "../../SERVICE/STD_TYPES.h"
-#include "../../MCAL/DIO/dio.h"
-#define  F_CPU   8000000UL
+#include "../../MCAL/dio/DIO.h"
+//#define  F_CPU   8000000UL
 #include <util/delay.h>
 
 #define _4_bit_mode		0

@@ -11,14 +11,14 @@ void KEYPAD_init(void){
 	
 	for (uint8_t row_pins = FIRST_ROW_PIN ; row_pins <= LAST_ROW_PIN ; row_pins++)
 	{
-		DIO_init(KEYPAD_PORT,row_pins,OUTPUT);
-		DIO_write(KEYPAD_PORT,row_pins,HIGH);
+		DIO_INITPIN(row_pins,OUTPUT);
+		DIO_WRITEPIN(row_pins,HIGH);
 	}
 	
 	for (uint8_t col_pins = FIRST_COL_PIN ; col_pins <= LAST_COL_PIN ; col_pins++)
 	{
-		DIO_init(KEYPAD_PORT,col_pins,INPUT);
-		DIO_write(KEYPAD_PORT,col_pins,HIGH);
+		DIO_INITPIN(col_pins,INPLUP);
+		
 
 	}
 	
@@ -36,14 +36,14 @@ uint8_t KEYPAD_getKey(){
 	for (uint8_t rows = FIRST_ROW_PIN ; rows <= LAST_ROW_PIN ; rows ++)
 	{
 		
-		DIO_write(KEYPAD_PORT,rows,LOW);
+		DIO_WRITEPIN(rows,LOW);
 		_delay_ms(20);
 		
 		for(uint8_t cols = FIRST_COL_PIN ; cols <= LAST_COL_PIN ; cols++){
-			DIO_read(KEYPAD_PORT,cols,&col_state);
+			DIO_READPIN(cols,&col_state);
 	
 			while(col_state == 0){
-				DIO_read(KEYPAD_PORT,cols,&col_state);
+				DIO_READPIN(cols,&col_state);
 				
 				
 				switch(rows){
@@ -169,7 +169,7 @@ uint8_t KEYPAD_getKey(){
 		}
 		
 		
-		DIO_write(KEYPAD_PORT,rows,HIGH);
+		DIO_WRITEPIN(rows,HIGH);
 		
 	}
 	

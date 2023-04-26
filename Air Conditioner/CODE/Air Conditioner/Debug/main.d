@@ -1,1 +1,77 @@
-main.d main.o: .././main.c
+main.d main.o: .././main.c .././APP/APP.h .././APP/../MCAL/DIO/DIO.h \
+ .././APP/../MCAL/DIO/../../SERVICE/utiles.h \
+ .././APP/../MCAL/DIO/../memorymap.h \
+ .././APP/../MCAL/DIO/../../SERVICE/std_types.h .././APP/../HAL/LED/LED.h \
+ .././APP/../HAL/LED/../../MCAL/DIO/DIO.h .././APP/../MCAL/TIMERS/timer.h \
+ .././APP/../MCAL/TIMERS/../../SERVICE/STD_TYPES.h \
+ .././APP/../MCAL/TIMERS/../../SERVICE/UTILES.h \
+ .././APP/../MCAL/TIMERS/../MEMORYMAP.h \
+ .././APP/../MCAL/TIMERS/../EXI_INTERRUPT/EXI_INTERRUPT.h \
+ .././APP/../MCAL/TIMERS/../EXI_INTERRUPT/../MEMORYMAP.h \
+ .././APP/../MCAL/TIMERS/../EXI_INTERRUPT/../../SERVICE/UTILES.h \
+ .././APP/../MCAL/TIMERS/../EXI_INTERRUPT/../DIO/DIO.h \
+ .././APP/../HAL/lcd/LCD.h .././APP/../HAL/lcd/../../SERVICE/STD_TYPES.h \
+ .././APP/../HAL/lcd/../../MCAL/dio/DIO.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
+ .././APP/../HAL/keypad/keypad.h \
+ .././APP/../HAL/keypad/../../MCAL/dio/DIO.h \
+ .././APP/../HAL/keypad/../../SERVICE/STD_TYPES.h
+
+.././APP/APP.h:
+
+.././APP/../MCAL/DIO/DIO.h:
+
+.././APP/../MCAL/DIO/../../SERVICE/utiles.h:
+
+.././APP/../MCAL/DIO/../memorymap.h:
+
+.././APP/../MCAL/DIO/../../SERVICE/std_types.h:
+
+.././APP/../HAL/LED/LED.h:
+
+.././APP/../HAL/LED/../../MCAL/DIO/DIO.h:
+
+.././APP/../MCAL/TIMERS/timer.h:
+
+.././APP/../MCAL/TIMERS/../../SERVICE/STD_TYPES.h:
+
+.././APP/../MCAL/TIMERS/../../SERVICE/UTILES.h:
+
+.././APP/../MCAL/TIMERS/../MEMORYMAP.h:
+
+.././APP/../MCAL/TIMERS/../EXI_INTERRUPT/EXI_INTERRUPT.h:
+
+.././APP/../MCAL/TIMERS/../EXI_INTERRUPT/../MEMORYMAP.h:
+
+.././APP/../MCAL/TIMERS/../EXI_INTERRUPT/../../SERVICE/UTILES.h:
+
+.././APP/../MCAL/TIMERS/../EXI_INTERRUPT/../DIO/DIO.h:
+
+.././APP/../HAL/lcd/LCD.h:
+
+.././APP/../HAL/lcd/../../SERVICE/STD_TYPES.h:
+
+.././APP/../HAL/lcd/../../MCAL/dio/DIO.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
+
+.././APP/../HAL/keypad/keypad.h:
+
+.././APP/../HAL/keypad/../../MCAL/dio/DIO.h:
+
+.././APP/../HAL/keypad/../../SERVICE/STD_TYPES.h:

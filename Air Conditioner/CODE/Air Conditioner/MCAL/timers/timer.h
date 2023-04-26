@@ -19,8 +19,11 @@
 
 #define TIMR0_MAX_VALUE		256
 #define TIMR2_MAX_VALUE		256
-extern uint8_t car_mode ;
-extern  int32_t mode_ovf ;
+
+extern uint8_t g_flagTimer ;
+extern uint8_t g_flagStage ;
+extern uint8_t g_tempValue  ; // default value
+
 
 /*****************************************************************************************************************************************************************
 *									Typedefs																				 *

@@ -94,23 +94,32 @@ void LCD_WRITE_DATA(uint8_t a_DATA)
 	DIO_WRITEPIN(D6,read_bit(a_DATA,6));
 	DIO_WRITEPIN(D7,read_bit(a_DATA,7));
 	DIO_WRITEPIN(EN,HIGH);
-	_delay_ms(1);
+	_delay_us(1);
 	DIO_WRITEPIN(EN,LOW);
-	_delay_ms(1);
+	_delay_us(200);
 	/**for the 4 least significant bits**/
 	DIO_WRITEPIN(D4,read_bit(a_DATA,0));
 	DIO_WRITEPIN(D5,read_bit(a_DATA,1));
 	DIO_WRITEPIN(D6,read_bit(a_DATA,2));
 	DIO_WRITEPIN(D7,read_bit(a_DATA,3));
 	DIO_WRITEPIN(EN,HIGH);
-	_delay_ms(1);
+	_delay_us(1);
 	DIO_WRITEPIN(EN,LOW);
-	_delay_ms(1);
+	_delay_ms(2);
 }
 /*************************************************************************************************************************/
 
 void LCD_INIT(void)
 {
+	DIO_INITPIN(pinc0,OUTPUT);
+	DIO_INITPIN(pinc1,OUTPUT);
+	DIO_INITPIN(pinc2,OUTPUT);
+	DIO_INITPIN(pinc3,OUTPUT);
+	
+	DIO_INITPIN(pind0,OUTPUT);
+	DIO_INITPIN(pind1,OUTPUT);
+	DIO_INITPIN(pind2,OUTPUT);
+	
 	_delay_ms(50);
 	LCD_WRITE_COMMAND(0x02);
 	_delay_ms(1);
@@ -187,5 +196,7 @@ void LCD_GoTo(uint8_t a_line,uint8_t a_cell)
 
 void LCD_Write_Charecter(uint8_t a_char)
 {
+	if(a_char!=0){
 	LCD_WRITE_DATA(a_char);
+}
 }

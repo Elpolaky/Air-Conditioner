@@ -9,8 +9,7 @@ static double g_ovfNum  ;
 static double g_time ;
 
  // used in TIMER_2_INT
-uint8_t car_mode = 0;
-int32_t mode_ovf = 0;
+
 static int32_t ovf = 0;
 /******************************************************************************************************/
 //										 TIMER 0
@@ -419,24 +418,21 @@ void TIMER_2_INT(){
 
 
 ISR(TIMER2_OVF){
-	if(car_flag == 1){
+	if(g_flagStage == 1 && g_flagTimer == 1){
 		
-		if (ovf < mode_ovf ){
+		if (ovf < 19532 ){
 			ovf++;
 		}
-		else if ( ovf == mode_ovf && mode_ovf!=0){
+		else if ( ovf == 19532){
 			ovf =0 ;
+			g_tempValue = 20 ;
+			g_flagStage = 2 ;
 			
-			if (car_mode < 8)
-			{
-				car_mode++;
-				
-			}else{
-				car_mode = 1 ;
-			}
 			
 		}
 		
+	}else{
+			ovf =0 ;
 	}
 	
 }
