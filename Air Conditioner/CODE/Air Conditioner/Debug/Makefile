@@ -34,14 +34,11 @@ LINKER_SCRIPT_DEP:=
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
 ../APP \
-../HAL/button \
-../HAL/led \
-../HAL/motor \
 ../HAL/lcd \
 ../HAL/keypad \
+../HAL/buzzer \
 ../MCAL \
 ../MCAL/dio \
-../MCAL/exi_interrupt \
 ../MCAL/adc \
 ../MCAL/timers \
 ../HAL \
@@ -51,15 +48,12 @@ SUBDIRS :=  \
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../APP/APP.c \
-../HAL/button/BUTTON.c \
+../HAL/buzzer/buzzer.c \
 ../HAL/keypad/keypad.c \
 ../HAL/lcd/LCD.c \
-../HAL/led/LED.c \
-../HAL/motor/MOTOR.c \
 ../main.c \
 ../MCAL/adc/ADC.c \
 ../MCAL/dio/DIO.c \
-../MCAL/exi_interrupt/EXI_INTERRUPT.c \
 ../MCAL/timers/timer.c \
 ../SERVICE/UTILS.c
 
@@ -72,57 +66,45 @@ ASM_SRCS +=
 
 OBJS +=  \
 APP/APP.o \
-HAL/button/BUTTON.o \
+HAL/buzzer/buzzer.o \
 HAL/keypad/keypad.o \
 HAL/lcd/LCD.o \
-HAL/led/LED.o \
-HAL/motor/MOTOR.o \
 main.o \
 MCAL/adc/ADC.o \
 MCAL/dio/DIO.o \
-MCAL/exi_interrupt/EXI_INTERRUPT.o \
 MCAL/timers/timer.o \
 SERVICE/UTILS.o
 
 OBJS_AS_ARGS +=  \
 APP/APP.o \
-HAL/button/BUTTON.o \
+HAL/buzzer/buzzer.o \
 HAL/keypad/keypad.o \
 HAL/lcd/LCD.o \
-HAL/led/LED.o \
-HAL/motor/MOTOR.o \
 main.o \
 MCAL/adc/ADC.o \
 MCAL/dio/DIO.o \
-MCAL/exi_interrupt/EXI_INTERRUPT.o \
 MCAL/timers/timer.o \
 SERVICE/UTILS.o
 
 C_DEPS +=  \
 APP/APP.d \
-HAL/button/BUTTON.d \
+HAL/buzzer/buzzer.d \
 HAL/keypad/keypad.d \
 HAL/lcd/LCD.d \
-HAL/led/LED.d \
-HAL/motor/MOTOR.d \
 main.d \
 MCAL/adc/ADC.d \
 MCAL/dio/DIO.d \
-MCAL/exi_interrupt/EXI_INTERRUPT.d \
 MCAL/timers/timer.d \
 SERVICE/UTILS.d
 
 C_DEPS_AS_ARGS +=  \
 APP/APP.d \
-HAL/button/BUTTON.d \
+HAL/buzzer/buzzer.d \
 HAL/keypad/keypad.d \
 HAL/lcd/LCD.d \
-HAL/led/LED.d \
-HAL/motor/MOTOR.d \
 main.d \
 MCAL/adc/ADC.d \
 MCAL/dio/DIO.d \
-MCAL/exi_interrupt/EXI_INTERRUPT.d \
 MCAL/timers/timer.d \
 SERVICE/UTILS.d
 
@@ -147,7 +129,7 @@ APP/APP.o: ../APP/APP.c
 	@echo Finished building: $<
 	
 
-HAL/button/BUTTON.o: ../HAL/button/BUTTON.c
+HAL/buzzer/buzzer.o: ../HAL/buzzer/buzzer.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
@@ -162,20 +144,6 @@ HAL/keypad/keypad.o: ../HAL/keypad/keypad.c
 	
 
 HAL/lcd/LCD.o: ../HAL/lcd/LCD.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-HAL/led/LED.o: ../HAL/led/LED.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-HAL/motor/MOTOR.o: ../HAL/motor/MOTOR.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
@@ -197,13 +165,6 @@ MCAL/adc/ADC.o: ../MCAL/adc/ADC.c
 	
 
 MCAL/dio/DIO.o: ../MCAL/dio/DIO.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-MCAL/exi_interrupt/EXI_INTERRUPT.o: ../MCAL/exi_interrupt/EXI_INTERRUPT.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

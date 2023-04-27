@@ -2,16 +2,16 @@
  * ADC.h
  *
  * Created: 4/20/2023 6:18:00 AM
- *  Author: acer
+ *  Author: NADA
  */ 
 
-/*
+
 #ifndef ADC_H_
 #define ADC_H_
 
-#include "../../register.h"
-#include "../../types.h"
-#include "ADC_config.h"
+#include "../MEMORYMAP.h"
+#include "../../SERVICE/STD_TYPES.h"
+#include "adc_config.h"
 
 // ADC channels
 typedef enum
@@ -65,10 +65,27 @@ typedef enum
 #define ADC_CH_selector_clr_msk      0b11100000
 
 
+// Functions prototypes
+/************************************************ADC_init**********************************************************************************/
+/* Description:
+Function used to initialize the ADC with the properties chosen from thE ADC_config
+*******************************************************************************************************************************************/
 void ADC_init(void);
+/************************************************ADC_start_conversion**********************************************************************************/
+/* Description:
+Function used to start the ADC conversion at the required pin
+********************************************************************************************************************************************************/
 void ADC_start_conversion (ADC_CH_type ADC_CH);
-
-uint16_t ADC_Read(void);
+/************************************************ADC_Read***********************************************************************************************/
+/* Description:
+Function used to read the value converted by the ADC using the right method right method to read high and low bits
+********************************************************************************************************************************************************/
+uint16 ADC_Read(void);
+/************************************************LM35_Read***********************************************************************************************/
+/* Description:
+Function used to calibrate the value read from the LM35 temperature sensor using ADC_Read according to voltage reference 2.56 volts in degree celsius
+********************************************************************************************************************************************************/
+uint16 ADC_LM35_calibration (void);
 
 
 

@@ -2,7 +2,7 @@
  * keypad.c
  *
  * Created: 4/18/2023 6:10:37 AM
- *  Author: moham
+ *  Author: Kareem
  */ 
 #include "keypad.h"
 
@@ -58,126 +58,126 @@ uint8_t KEYPAD_getKey(){
 			while(a_col_state == 0){
 				DIO_READPIN(a_cols,&a_col_state);
 				
-					//check the pressed row
-					switch(a_rows){
+				//check the pressed row
+				switch(a_rows){
 				
-						case ROW_0 :
-						
-							//check the pressed column
-							switch(a_cols){
-							
-								case COL_0 :
-								a_keychar = KEYPAD_ROW_0_COLUMN_0 ;
-								break;
-							
-								case COL_1 :
-								a_keychar = KEYPAD_ROW_0_COLUMN_1;
-								break;
-							
-								case COL_2 :
-								a_keychar = KEYPAD_ROW_0_COLUMN_2;
-								break;
-							
-								case COL_3 :
-								a_keychar = KEYPAD_ROW_0_COLUMN_3;
-								break;
-							
-							}
-						
-					  break ;
-						
-						
-						
-					  case ROW_1 :
-						//check the pressed column
-						switch(a_cols){
-							
-								case COL_0 :
-								a_keychar= KEYPAD_ROW_1_COLUMN_0 ;
-								break;
-							
-								case COL_1 :
-								a_keychar = KEYPAD_ROW_1_COLUMN_1;
-								break;
-							
-								case COL_2 :
-								a_keychar= KEYPAD_ROW_1_COLUMN_2;
-								break;
-							
-								case COL_3 :
-								a_keychar = KEYPAD_ROW_1_COLUMN_3;
-								break;
-							
-							}
-						
-					  break ;
-						
-						
-						
-						
-						
-					  case ROW_2 :
+					case ROW_0 :
 						
 						//check the pressed column
 						switch(a_cols){
 							
-								case COL_0 :
-								a_keychar= KEYPAD_ROW_2_COLUMN_0 ;
-								break;
+							case COL_0 :
+							a_keychar = KEYPAD_ROW_0_COLUMN_0 ;
+							break;
 							
-								case COL_1 :
-								a_keychar = KEYPAD_ROW_2_COLUMN_1;
-								break;
+							case COL_1 :
+							a_keychar = KEYPAD_ROW_0_COLUMN_1;
+							break;
 							
-								case COL_2 :
-								a_keychar= KEYPAD_ROW_2_COLUMN_2;
-								break;
+							case COL_2 :
+							a_keychar = KEYPAD_ROW_0_COLUMN_2;
+							break;
 							
-								case COL_3 :
-								a_keychar = KEYPAD_ROW_2_COLUMN_3;
-								break;
+							case COL_3 :
+							a_keychar = KEYPAD_ROW_0_COLUMN_3;
+							break;
 							
-							}
+						}
 						
-					  break ;
-						
-						
+				  break ;
 						
 						
-					  case ROW_3 :
 						
-						//check the pressed column
-					   switch(a_cols){
+				  case ROW_1 :
+					//check the pressed column
+					switch(a_cols){
 							
-								case COL_0 :
-								a_keychar= KEYPAD_ROW_3_COLUMN_0 ;
-								break;
+							case COL_0 :
+							a_keychar= KEYPAD_ROW_1_COLUMN_0 ;
+							break;
 							
-								case COL_1 :
-								a_keychar = KEYPAD_ROW_3_COLUMN_1;
-								break;
+							case COL_1 :
+							a_keychar = KEYPAD_ROW_1_COLUMN_1;
+							break;
 							
-								case COL_2 :
-								a_keychar= KEYPAD_ROW_3_COLUMN_2;
-								break;
+							case COL_2 :
+							a_keychar= KEYPAD_ROW_1_COLUMN_2;
+							break;
 							
-								case COL_3 :
-								a_keychar = KEYPAD_ROW_3_COLUMN_3;
-								break;
+							case COL_3 :
+							a_keychar = KEYPAD_ROW_1_COLUMN_3;
+							break;
 							
-							}
+						}
 						
-						break ;
+				  break ;
+						
+						
+						
+						
+						
+				  case ROW_2 :
+						
+					//check the pressed column
+					switch(a_cols){
+							
+							case COL_0 :
+							a_keychar= KEYPAD_ROW_2_COLUMN_0 ;
+							break;
+							
+							case COL_1 :
+							a_keychar = KEYPAD_ROW_2_COLUMN_1;
+							break;
+							
+							case COL_2 :
+							a_keychar= KEYPAD_ROW_2_COLUMN_2;
+							break;
+							
+							case COL_3 :
+							a_keychar = KEYPAD_ROW_2_COLUMN_3;
+							break;
+							
+						}
+						
+				  break ;
+						
+						
+						
+						
+				  case ROW_3 :
+						
+					//check the pressed column
+				   switch(a_cols){
+							
+							case COL_0 :
+							a_keychar= KEYPAD_ROW_3_COLUMN_0 ;
+							break;
+							
+							case COL_1 :
+							a_keychar = KEYPAD_ROW_3_COLUMN_1;
+							break;
+							
+							case COL_2 :
+							a_keychar= KEYPAD_ROW_3_COLUMN_2;
+							break;
+							
+							case COL_3 :
+							a_keychar = KEYPAD_ROW_3_COLUMN_3;
+							break;
+							
+						}
+						
+			break ;
 						
 						
 
-					 // no press			
-					default: 
-					a_keychar = 0;
-					break;
+			// no press			
+			default: 
+			a_keychar = 0;
+			break;
 					
 				
-						}	
+				}	
 				
 				
 				}

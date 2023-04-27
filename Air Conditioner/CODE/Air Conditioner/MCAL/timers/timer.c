@@ -425,7 +425,7 @@ ISR(TIMER2_OVF){
 		}
 		else if ( ovf == 19532){
 			ovf =0 ;
-			g_tempValue = 20 ;
+			//g_tempValue = 20 ;
 			g_flagStage = 2 ;
 			
 			

@@ -2,7 +2,7 @@
  * ADC_config.h
  *
  * Created: 4/20/2023 8:01:38 AM
- *  Author: acer
+ *  Author: NADA
  */ 
 
 

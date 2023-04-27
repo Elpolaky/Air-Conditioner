@@ -103,4 +103,14 @@ void INT_VECT(void)
 
 /***** TIMSK***/
 #define TOIE2 6
+
+/*************************************ADC MAPPING**************************************/
+
+#define ADMUX     *((volatile uint8_t*)0x27)
+#define ADCSRA    *((volatile uint8_t*)0x26)
+#define ADCL      *((volatile uint8_t*)0x24)
+#define ADCH      *((volatile uint8_t*)0x25)
+#define ADCLH     *((volatile unsigned short int*)0x24) // use this when we use right method to read high and low bits
+#define SFIOR     *((volatile uint8_t*)0x50)
+
 #endif /* memorymap_H_ */

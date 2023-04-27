@@ -35,5 +35,7 @@ void LCD_Write_Number(uint32_t a_number);
 void LCD_Clear(void);
 void LCD_GoTo(uint8_t a_line,uint8_t a_cell);
 void LCD_Write_Charecter(uint8_t a_char);
+void LCD_Create_Charecter(uint8_t*a_Pattern,uint8_t a_Adress);
+
 
 #endif /* LCD_H_ */
