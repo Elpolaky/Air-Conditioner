@@ -23,11 +23,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  000004e0  00000000  00000000  00006034  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000b05  00000000  00000000  00006514  2**0
+ 10 .debug_str    00000b0d  00000000  00000000  00006514  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00001d2e  00000000  00000000  00007019  2**0
+ 11 .debug_loc    00001d2e  00000000  00000000  00007021  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000180  00000000  00000000  00008d47  2**0
+ 12 .debug_ranges 00000180  00000000  00000000  00008d4f  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -305,7 +305,7 @@ void app_Start(void){
 	}
 	
 	
-if (g_flagStage == 1 ){
+	if (g_flagStage == 1 ){
      1b8:	80 91 ac 00 	lds	r24, 0x00AC	; 0x8000ac <g_flagStage>
      1bc:	81 30       	cpi	r24, 0x01	; 1
      1be:	21 f4       	brne	.+8      	; 0x1c8 <app_Start+0x1e>
@@ -330,10 +330,10 @@ if (g_flagStage == 1 ){
      1d4:	08 95       	ret
 
 000001d6 <KEYPAD_init>:
- *  Author: moham
- */ 
-#include "keypad.h"
-
+/* Description:
+- Function used to initialize the rows pins of keypad as output and set them high and initialize the columns pins of keypad as  input pullup
+- FIRST_ROW_PIN , LAST_ROW_PIN ,FIRST_COL_PIN , LAST_COL_PIN are used to define the keypad dimensions and can be changed in configurations
+************************************************************************************************************************************************/
 
 void KEYPAD_init(void){
      1d6:	cf 93       	push	r28
@@ -350,8 +350,8 @@ void KEYPAD_init(void){
      1e4:	61 e0       	ldi	r22, 0x01	; 1
      1e6:	8c 2f       	mov	r24, r28
      1e8:	0e 94 57 04 	call	0x8ae	; 0x8ae <DIO_WRITEPIN>
-#include "keypad.h"
-
+- FIRST_ROW_PIN , LAST_ROW_PIN ,FIRST_COL_PIN , LAST_COL_PIN are used to define the keypad dimensions and can be changed in configurations
+************************************************************************************************************************************************/
 
 void KEYPAD_init(void){
 	
@@ -389,10 +389,10 @@ void KEYPAD_init(void){
      206:	08 95       	ret
 
 00000208 <KEYPAD_getKey>:
-
-
-
-
+/* Description:
+- Function used to return the data of the pressed key
+- data can be changed in configurations
+*************************************************************************************************************************************************/
 
 uint8_t KEYPAD_getKey(){
      208:	ff 92       	push	r15
@@ -404,16 +404,18 @@ uint8_t KEYPAD_getKey(){
      214:	cd b7       	in	r28, 0x3d	; 61
      216:	de b7       	in	r29, 0x3e	; 62
 	
-	uint8_t col_state =1 ;
+	uint8_t a_col_state =1 ;
      218:	81 e0       	ldi	r24, 0x01	; 1
      21a:	89 83       	std	Y+1, r24	; 0x01
-	uint8_t  keychar ;
-	for (uint8_t rows = FIRST_ROW_PIN ; rows <= LAST_ROW_PIN ; rows ++)
+	uint8_t  a_keychar ;
+	
+	//loop for rows
+	for (uint8_t a_rows = FIRST_ROW_PIN ; a_rows <= LAST_ROW_PIN ; a_rows ++)
      21c:	00 e0       	ldi	r16, 0x00	; 0
      21e:	ae c0       	rjmp	.+348    	; 0x37c <KEYPAD_getKey+0x174>
 	{
 		
-		DIO_WRITEPIN(rows,LOW);
+		DIO_WRITEPIN(a_rows,LOW);
      220:	60 e0       	ldi	r22, 0x00	; 0
      222:	80 2f       	mov	r24, r16
      224:	0e 94 57 04 	call	0x8ae	; 0x8ae <DIO_WRITEPIN>
@@ -431,27 +433,28 @@ uint8_t KEYPAD_getKey(){
      232:	00 00       	nop
 		_delay_ms(20);
 		
-		for(uint8_t cols = FIRST_COL_PIN ; cols <= LAST_COL_PIN ; cols++){
+		//loop  for columns
+		for(uint8_t a_cols = FIRST_COL_PIN ; a_cols <= LAST_COL_PIN ; a_cols++){
      234:	13 e0       	ldi	r17, 0x03	; 3
      236:	9a c0       	rjmp	.+308    	; 0x36c <KEYPAD_getKey+0x164>
-			DIO_READPIN(cols,&col_state);
+			DIO_READPIN(a_cols,&a_col_state);
      238:	be 01       	movw	r22, r28
      23a:	6f 5f       	subi	r22, 0xFF	; 255
      23c:	7f 4f       	sbci	r23, 0xFF	; 255
      23e:	81 2f       	mov	r24, r17
      240:	0e 94 f4 04 	call	0x9e8	; 0x9e8 <DIO_READPIN>
 	
-			while(col_state == 0){
+			while(a_col_state == 0){
      244:	8e c0       	rjmp	.+284    	; 0x362 <KEYPAD_getKey+0x15a>
-				DIO_READPIN(cols,&col_state);
+				DIO_READPIN(a_cols,&a_col_state);
      246:	be 01       	movw	r22, r28
      248:	6f 5f       	subi	r22, 0xFF	; 255
      24a:	7f 4f       	sbci	r23, 0xFF	; 255
      24c:	81 2f       	mov	r24, r17
      24e:	0e 94 f4 04 	call	0x9e8	; 0x9e8 <DIO_READPIN>
 				
-				
-				switch(rows){
+				//check the pressed row
+				switch(a_rows){
      252:	01 30       	cpi	r16, 0x01	; 1
      254:	11 f1       	breq	.+68     	; 0x29a <KEYPAD_getKey+0x92>
      256:	30 f0       	brcs	.+12     	; 0x264 <KEYPAD_getKey+0x5c>
@@ -464,7 +467,8 @@ uint8_t KEYPAD_getKey(){
 				
 					case ROW_0 :
 						
-						switch(cols){
+						//check the pressed column
+						switch(a_cols){
      264:	14 30       	cpi	r17, 0x04	; 4
      266:	51 f0       	breq	.+20     	; 0x27c <KEYPAD_getKey+0x74>
      268:	20 f4       	brcc	.+8      	; 0x272 <KEYPAD_getKey+0x6a>
@@ -478,11 +482,11 @@ uint8_t KEYPAD_getKey(){
      278:	59 f0       	breq	.+22     	; 0x290 <KEYPAD_getKey+0x88>
      27a:	73 c0       	rjmp	.+230    	; 0x362 <KEYPAD_getKey+0x15a>
 							case COL_0 :
-							keychar= KEYPAD_ROW_0_COLUMN_0 ;
+							a_keychar = KEYPAD_ROW_0_COLUMN_0 ;
 							break;
 							
 							case COL_1 :
-							keychar = KEYPAD_ROW_0_COLUMN_1;
+							a_keychar = KEYPAD_ROW_0_COLUMN_1;
      27c:	0f 2e       	mov	r0, r31
      27e:	f8 e3       	ldi	r31, 0x38	; 56
      280:	ff 2e       	mov	r15, r31
@@ -491,7 +495,7 @@ uint8_t KEYPAD_getKey(){
      284:	6e c0       	rjmp	.+220    	; 0x362 <KEYPAD_getKey+0x15a>
 							
 							case COL_2 :
-							keychar= KEYPAD_ROW_0_COLUMN_2;
+							a_keychar = KEYPAD_ROW_0_COLUMN_2;
      286:	0f 2e       	mov	r0, r31
      288:	f9 e3       	ldi	r31, 0x39	; 57
      28a:	ff 2e       	mov	r15, r31
@@ -500,7 +504,7 @@ uint8_t KEYPAD_getKey(){
      28e:	69 c0       	rjmp	.+210    	; 0x362 <KEYPAD_getKey+0x15a>
 							
 							case COL_3 :
-							keychar = KEYPAD_ROW_0_COLUMN_3;
+							a_keychar = KEYPAD_ROW_0_COLUMN_3;
      290:	0f 2e       	mov	r0, r31
      292:	ff e2       	ldi	r31, 0x2F	; 47
      294:	ff 2e       	mov	r15, r31
@@ -511,8 +515,8 @@ uint8_t KEYPAD_getKey(){
 						
 						
 				  case ROW_1 :
-						
-					switch(cols){
+					//check the pressed column
+					switch(a_cols){
      29a:	14 30       	cpi	r17, 0x04	; 4
      29c:	51 f0       	breq	.+20     	; 0x2b2 <KEYPAD_getKey+0xaa>
      29e:	20 f4       	brcc	.+8      	; 0x2a8 <KEYPAD_getKey+0xa0>
@@ -526,11 +530,11 @@ uint8_t KEYPAD_getKey(){
      2ae:	59 f0       	breq	.+22     	; 0x2c6 <KEYPAD_getKey+0xbe>
      2b0:	58 c0       	rjmp	.+176    	; 0x362 <KEYPAD_getKey+0x15a>
 							case COL_0 :
-							keychar= KEYPAD_ROW_1_COLUMN_0 ;
+							a_keychar= KEYPAD_ROW_1_COLUMN_0 ;
 							break;
 							
 							case COL_1 :
-							keychar = KEYPAD_ROW_1_COLUMN_1;
+							a_keychar = KEYPAD_ROW_1_COLUMN_1;
      2b2:	0f 2e       	mov	r0, r31
      2b4:	f5 e3       	ldi	r31, 0x35	; 53
      2b6:	ff 2e       	mov	r15, r31
@@ -539,7 +543,7 @@ uint8_t KEYPAD_getKey(){
      2ba:	53 c0       	rjmp	.+166    	; 0x362 <KEYPAD_getKey+0x15a>
 							
 							case COL_2 :
-							keychar= KEYPAD_ROW_1_COLUMN_2;
+							a_keychar= KEYPAD_ROW_1_COLUMN_2;
      2bc:	0f 2e       	mov	r0, r31
      2be:	f6 e3       	ldi	r31, 0x36	; 54
      2c0:	ff 2e       	mov	r15, r31
@@ -548,7 +552,7 @@ uint8_t KEYPAD_getKey(){
      2c4:	4e c0       	rjmp	.+156    	; 0x362 <KEYPAD_getKey+0x15a>
 							
 							case COL_3 :
-							keychar = KEYPAD_ROW_1_COLUMN_3;
+							a_keychar = KEYPAD_ROW_1_COLUMN_3;
      2c6:	0f 2e       	mov	r0, r31
      2c8:	fa e2       	ldi	r31, 0x2A	; 42
      2ca:	ff 2e       	mov	r15, r31
@@ -557,10 +561,10 @@ uint8_t KEYPAD_getKey(){
      2ce:	49 c0       	rjmp	.+146    	; 0x362 <KEYPAD_getKey+0x15a>
 						
 						
-						
 				  case ROW_2 :
 						
-					switch(cols){
+					//check the pressed column
+					switch(a_cols){
      2d0:	14 30       	cpi	r17, 0x04	; 4
      2d2:	49 f0       	breq	.+18     	; 0x2e6 <KEYPAD_getKey+0xde>
      2d4:	18 f4       	brcc	.+6      	; 0x2dc <KEYPAD_getKey+0xd4>
@@ -573,11 +577,11 @@ uint8_t KEYPAD_getKey(){
      2e2:	59 f0       	breq	.+22     	; 0x2fa <KEYPAD_getKey+0xf2>
      2e4:	3e c0       	rjmp	.+124    	; 0x362 <KEYPAD_getKey+0x15a>
 							case COL_0 :
-							keychar= KEYPAD_ROW_2_COLUMN_0 ;
+							a_keychar= KEYPAD_ROW_2_COLUMN_0 ;
 							break;
 							
 							case COL_1 :
-							keychar = KEYPAD_ROW_2_COLUMN_1;
+							a_keychar = KEYPAD_ROW_2_COLUMN_1;
      2e6:	0f 2e       	mov	r0, r31
      2e8:	f2 e3       	ldi	r31, 0x32	; 50
      2ea:	ff 2e       	mov	r15, r31
@@ -586,7 +590,7 @@ uint8_t KEYPAD_getKey(){
      2ee:	39 c0       	rjmp	.+114    	; 0x362 <KEYPAD_getKey+0x15a>
 							
 							case COL_2 :
-							keychar= KEYPAD_ROW_2_COLUMN_2;
+							a_keychar= KEYPAD_ROW_2_COLUMN_2;
      2f0:	0f 2e       	mov	r0, r31
      2f2:	f3 e3       	ldi	r31, 0x33	; 51
      2f4:	ff 2e       	mov	r15, r31
@@ -595,7 +599,7 @@ uint8_t KEYPAD_getKey(){
      2f8:	34 c0       	rjmp	.+104    	; 0x362 <KEYPAD_getKey+0x15a>
 							
 							case COL_3 :
-							keychar = KEYPAD_ROW_2_COLUMN_3;
+							a_keychar = KEYPAD_ROW_2_COLUMN_3;
      2fa:	0f 2e       	mov	r0, r31
      2fc:	fd e2       	ldi	r31, 0x2D	; 45
      2fe:	ff 2e       	mov	r15, r31
@@ -604,10 +608,10 @@ uint8_t KEYPAD_getKey(){
      302:	2f c0       	rjmp	.+94     	; 0x362 <KEYPAD_getKey+0x15a>
 						
 						
-						
 				  case ROW_3 :
 						
-				   switch(cols){
+					//check the pressed column
+				   switch(a_cols){
      304:	14 30       	cpi	r17, 0x04	; 4
      306:	49 f0       	breq	.+18     	; 0x31a <KEYPAD_getKey+0x112>
      308:	18 f4       	brcc	.+6      	; 0x310 <KEYPAD_getKey+0x108>
@@ -620,11 +624,11 @@ uint8_t KEYPAD_getKey(){
      316:	59 f0       	breq	.+22     	; 0x32e <KEYPAD_getKey+0x126>
      318:	24 c0       	rjmp	.+72     	; 0x362 <KEYPAD_getKey+0x15a>
 							case COL_0 :
-							keychar= KEYPAD_ROW_3_COLUMN_0 ;
+							a_keychar= KEYPAD_ROW_3_COLUMN_0 ;
 							break;
 							
 							case COL_1 :
-							keychar = KEYPAD_ROW_3_COLUMN_1;
+							a_keychar = KEYPAD_ROW_3_COLUMN_1;
      31a:	0f 2e       	mov	r0, r31
      31c:	f0 e3       	ldi	r31, 0x30	; 48
      31e:	ff 2e       	mov	r15, r31
@@ -633,7 +637,7 @@ uint8_t KEYPAD_getKey(){
      322:	1f c0       	rjmp	.+62     	; 0x362 <KEYPAD_getKey+0x15a>
 							
 							case COL_2 :
-							keychar= KEYPAD_ROW_3_COLUMN_2;
+							a_keychar= KEYPAD_ROW_3_COLUMN_2;
      324:	0f 2e       	mov	r0, r31
      326:	fd e3       	ldi	r31, 0x3D	; 61
      328:	ff 2e       	mov	r15, r31
@@ -642,7 +646,7 @@ uint8_t KEYPAD_getKey(){
      32c:	1a c0       	rjmp	.+52     	; 0x362 <KEYPAD_getKey+0x15a>
 							
 							case COL_3 :
-							keychar = KEYPAD_ROW_3_COLUMN_3;
+							a_keychar = KEYPAD_ROW_3_COLUMN_3;
      32e:	0f 2e       	mov	r0, r31
      330:	fb e2       	ldi	r31, 0x2B	; 43
      332:	ff 2e       	mov	r15, r31
@@ -652,70 +656,70 @@ uint8_t KEYPAD_getKey(){
 						
 						
 
-						
+			// no press			
 			default: 
-			keychar = 0;
+			a_keychar = 0;
      338:	f1 2c       	mov	r15, r1
      33a:	13 c0       	rjmp	.+38     	; 0x362 <KEYPAD_getKey+0x15a>
-					case ROW_0 :
 						
-						switch(cols){
+						//check the pressed column
+						switch(a_cols){
 							
 							case COL_0 :
-							keychar= KEYPAD_ROW_0_COLUMN_0 ;
+							a_keychar = KEYPAD_ROW_0_COLUMN_0 ;
      33c:	0f 2e       	mov	r0, r31
      33e:	f7 e3       	ldi	r31, 0x37	; 55
      340:	ff 2e       	mov	r15, r31
      342:	f0 2d       	mov	r31, r0
      344:	0e c0       	rjmp	.+28     	; 0x362 <KEYPAD_getKey+0x15a>
 				  case ROW_1 :
-						
-					switch(cols){
+					//check the pressed column
+					switch(a_cols){
 							
 							case COL_0 :
-							keychar= KEYPAD_ROW_1_COLUMN_0 ;
+							a_keychar= KEYPAD_ROW_1_COLUMN_0 ;
      346:	0f 2e       	mov	r0, r31
      348:	f4 e3       	ldi	r31, 0x34	; 52
      34a:	ff 2e       	mov	r15, r31
      34c:	f0 2d       	mov	r31, r0
      34e:	09 c0       	rjmp	.+18     	; 0x362 <KEYPAD_getKey+0x15a>
-				  case ROW_2 :
 						
-					switch(cols){
+					//check the pressed column
+					switch(a_cols){
 							
 							case COL_0 :
-							keychar= KEYPAD_ROW_2_COLUMN_0 ;
+							a_keychar= KEYPAD_ROW_2_COLUMN_0 ;
      350:	0f 2e       	mov	r0, r31
      352:	f1 e3       	ldi	r31, 0x31	; 49
      354:	ff 2e       	mov	r15, r31
      356:	f0 2d       	mov	r31, r0
      358:	04 c0       	rjmp	.+8      	; 0x362 <KEYPAD_getKey+0x15a>
-				  case ROW_3 :
 						
-				   switch(cols){
+					//check the pressed column
+				   switch(a_cols){
 							
 							case COL_0 :
-							keychar= KEYPAD_ROW_3_COLUMN_0 ;
+							a_keychar= KEYPAD_ROW_3_COLUMN_0 ;
      35a:	0f 2e       	mov	r0, r31
      35c:	f1 e4       	ldi	r31, 0x41	; 65
      35e:	ff 2e       	mov	r15, r31
      360:	f0 2d       	mov	r31, r0
-		_delay_ms(20);
 		
-		for(uint8_t cols = FIRST_COL_PIN ; cols <= LAST_COL_PIN ; cols++){
-			DIO_READPIN(cols,&col_state);
+		//loop  for columns
+		for(uint8_t a_cols = FIRST_COL_PIN ; a_cols <= LAST_COL_PIN ; a_cols++){
+			DIO_READPIN(a_cols,&a_col_state);
 	
-			while(col_state == 0){
+			while(a_col_state == 0){
      362:	89 81       	ldd	r24, Y+1	; 0x01
      364:	88 23       	and	r24, r24
      366:	09 f4       	brne	.+2      	; 0x36a <KEYPAD_getKey+0x162>
      368:	6e cf       	rjmp	.-292    	; 0x246 <KEYPAD_getKey+0x3e>
-	{
 		
-		DIO_WRITEPIN(rows,LOW);
+		DIO_WRITEPIN(a_rows,LOW);
 		_delay_ms(20);
 		
-		for(uint8_t cols = FIRST_COL_PIN ; cols <= LAST_COL_PIN ; cols++){
+		//loop  for columns
+		for(uint8_t a_cols = FIRST_COL_PIN ; a_cols <= LAST_COL_PIN ; a_cols++){
      36a:	1f 5f       	subi	r17, 0xFF	; 255
      36c:	16 30       	cpi	r17, 0x06	; 6
      36e:	08 f4       	brcc	.+2      	; 0x372 <KEYPAD_getKey+0x16a>
@@ -725,25 +729,25 @@ uint8_t KEYPAD_getKey(){
 		}
 		
 		
-		DIO_WRITEPIN(rows,HIGH);
+		DIO_WRITEPIN(a_rows,HIGH);
      372:	61 e0       	ldi	r22, 0x01	; 1
      374:	80 2f       	mov	r24, r16
      376:	0e 94 57 04 	call	0x8ae	; 0x8ae <DIO_WRITEPIN>
-
-uint8_t KEYPAD_getKey(){
 	
-	uint8_t col_state =1 ;
-	uint8_t  keychar ;
-	for (uint8_t rows = FIRST_ROW_PIN ; rows <= LAST_ROW_PIN ; rows ++)
+	uint8_t a_col_state =1 ;
+	uint8_t  a_keychar ;
+	
+	//loop for rows
+	for (uint8_t a_rows = FIRST_ROW_PIN ; a_rows <= LAST_ROW_PIN ; a_rows ++)
      37a:	0f 5f       	subi	r16, 0xFF	; 255
      37c:	03 30       	cpi	r16, 0x03	; 3
      37e:	08 f4       	brcc	.+2      	; 0x382 <KEYPAD_getKey+0x17a>
      380:	4f cf       	rjmp	.-354    	; 0x220 <KEYPAD_getKey+0x18>
-		DIO_WRITEPIN(rows,HIGH);
+		DIO_WRITEPIN(a_rows,HIGH);
 		
 	}
 	
-	return keychar ;
+	return a_keychar ;
      382:	8f 2d       	mov	r24, r15
      384:	0f 90       	pop	r0
      386:	df 91       	pop	r29

@@ -884,22 +884,22 @@ END GROUP
  .debug_frame   0x00000214      0x124 MCAL/exi_interrupt/EXI_INTERRUPT.o
  .debug_frame   0x00000338      0x1a8 MCAL/timers/timer.o
 
-.debug_str      0x00000000      0xb05
+.debug_str      0x00000000      0xb0d
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_str     0x00000196      0x306 APP/APP.o
                                 0x33a (size before relaxing)
- .debug_str     0x0000049c       0xff HAL/keypad/keypad.o
-                                0x364 (size before relaxing)
- .debug_str     0x0000059b       0xa8 HAL/lcd/LCD.o
+ .debug_str     0x0000049c      0x107 HAL/keypad/keypad.o
+                                0x36c (size before relaxing)
+ .debug_str     0x000005a3       0xa8 HAL/lcd/LCD.o
                                 0x3c3 (size before relaxing)
- .debug_str     0x00000643       0x11 main.o
+ .debug_str     0x0000064b       0x11 main.o
                                 0x19c (size before relaxing)
- .debug_str     0x00000654      0x142 MCAL/dio/DIO.o
+ .debug_str     0x0000065c      0x142 MCAL/dio/DIO.o
                                 0x341 (size before relaxing)
- .debug_str     0x00000796      0x134 MCAL/exi_interrupt/EXI_INTERRUPT.o
+ .debug_str     0x0000079e      0x134 MCAL/exi_interrupt/EXI_INTERRUPT.o
                                 0x35a (size before relaxing)
- .debug_str     0x000008ca      0x23b MCAL/timers/timer.o
+ .debug_str     0x000008d2      0x23b MCAL/timers/timer.o
                                 0x3f8 (size before relaxing)
 
 .debug_loc      0x00000000     0x1d2e

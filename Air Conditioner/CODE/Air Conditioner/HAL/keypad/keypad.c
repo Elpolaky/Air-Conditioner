@@ -7,6 +7,12 @@
 #include "keypad.h"
 
 
+/************************************************ KEYPAD_init **********************************************************************************/
+/* Description:
+- Function used to initialize the rows pins of keypad as output and set them high and initialize the columns pins of keypad as  input pullup
+- FIRST_ROW_PIN , LAST_ROW_PIN ,FIRST_COL_PIN , LAST_COL_PIN are used to define the keypad dimensions and can be changed in configurations
+************************************************************************************************************************************************/
+
 void KEYPAD_init(void){
 	
 	for (uint8_t row_pins = FIRST_ROW_PIN ; row_pins <= LAST_ROW_PIN ; row_pins++)
@@ -27,141 +33,151 @@ void KEYPAD_init(void){
 
 
 
-
+/************************************************ KEYPAD_getKey **********************************************************************************/
+/* Description:
+- Function used to return the data of the pressed key
+- data can be changed in configurations
+*************************************************************************************************************************************************/
 
 uint8_t KEYPAD_getKey(){
 	
-	uint8_t col_state =1 ;
-	uint8_t  keychar ;
-	for (uint8_t rows = FIRST_ROW_PIN ; rows <= LAST_ROW_PIN ; rows ++)
+	uint8_t a_col_state =1 ;
+	uint8_t  a_keychar ;
+	
+	//loop for rows
+	for (uint8_t a_rows = FIRST_ROW_PIN ; a_rows <= LAST_ROW_PIN ; a_rows ++)
 	{
 		
-		DIO_WRITEPIN(rows,LOW);
+		DIO_WRITEPIN(a_rows,LOW);
 		_delay_ms(20);
 		
-		for(uint8_t cols = FIRST_COL_PIN ; cols <= LAST_COL_PIN ; cols++){
-			DIO_READPIN(cols,&col_state);
+		//loop  for columns
+		for(uint8_t a_cols = FIRST_COL_PIN ; a_cols <= LAST_COL_PIN ; a_cols++){
+			DIO_READPIN(a_cols,&a_col_state);
 	
-			while(col_state == 0){
-				DIO_READPIN(cols,&col_state);
+			while(a_col_state == 0){
+				DIO_READPIN(a_cols,&a_col_state);
 				
+					//check the pressed row
+					switch(a_rows){
 				
-				switch(rows){
-				
-					case ROW_0 :
+						case ROW_0 :
 						
-						switch(cols){
+							//check the pressed column
+							switch(a_cols){
 							
-							case COL_0 :
-							keychar= KEYPAD_ROW_0_COLUMN_0 ;
-							break;
+								case COL_0 :
+								a_keychar = KEYPAD_ROW_0_COLUMN_0 ;
+								break;
 							
-							case COL_1 :
-							keychar = KEYPAD_ROW_0_COLUMN_1;
-							break;
+								case COL_1 :
+								a_keychar = KEYPAD_ROW_0_COLUMN_1;
+								break;
 							
-							case COL_2 :
-							keychar= KEYPAD_ROW_0_COLUMN_2;
-							break;
+								case COL_2 :
+								a_keychar = KEYPAD_ROW_0_COLUMN_2;
+								break;
 							
-							case COL_3 :
-							keychar = KEYPAD_ROW_0_COLUMN_3;
-							break;
+								case COL_3 :
+								a_keychar = KEYPAD_ROW_0_COLUMN_3;
+								break;
 							
-						}
+							}
 						
-				  break ;
-						
+					  break ;
 						
 						
-				  case ROW_1 :
 						
-					switch(cols){
+					  case ROW_1 :
+						//check the pressed column
+						switch(a_cols){
 							
-							case COL_0 :
-							keychar= KEYPAD_ROW_1_COLUMN_0 ;
-							break;
+								case COL_0 :
+								a_keychar= KEYPAD_ROW_1_COLUMN_0 ;
+								break;
 							
-							case COL_1 :
-							keychar = KEYPAD_ROW_1_COLUMN_1;
-							break;
+								case COL_1 :
+								a_keychar = KEYPAD_ROW_1_COLUMN_1;
+								break;
 							
-							case COL_2 :
-							keychar= KEYPAD_ROW_1_COLUMN_2;
-							break;
+								case COL_2 :
+								a_keychar= KEYPAD_ROW_1_COLUMN_2;
+								break;
 							
-							case COL_3 :
-							keychar = KEYPAD_ROW_1_COLUMN_3;
-							break;
+								case COL_3 :
+								a_keychar = KEYPAD_ROW_1_COLUMN_3;
+								break;
 							
-						}
+							}
 						
-				  break ;
-						
+					  break ;
 						
 						
 						
 						
-				  case ROW_2 :
 						
-					switch(cols){
-							
-							case COL_0 :
-							keychar= KEYPAD_ROW_2_COLUMN_0 ;
-							break;
-							
-							case COL_1 :
-							keychar = KEYPAD_ROW_2_COLUMN_1;
-							break;
-							
-							case COL_2 :
-							keychar= KEYPAD_ROW_2_COLUMN_2;
-							break;
-							
-							case COL_3 :
-							keychar = KEYPAD_ROW_2_COLUMN_3;
-							break;
-							
-						}
+					  case ROW_2 :
 						
-				  break ;
-						
-						
-						
-						
-				  case ROW_3 :
-						
-				   switch(cols){
+						//check the pressed column
+						switch(a_cols){
 							
-							case COL_0 :
-							keychar= KEYPAD_ROW_3_COLUMN_0 ;
-							break;
+								case COL_0 :
+								a_keychar= KEYPAD_ROW_2_COLUMN_0 ;
+								break;
 							
-							case COL_1 :
-							keychar = KEYPAD_ROW_3_COLUMN_1;
-							break;
+								case COL_1 :
+								a_keychar = KEYPAD_ROW_2_COLUMN_1;
+								break;
 							
-							case COL_2 :
-							keychar= KEYPAD_ROW_3_COLUMN_2;
-							break;
+								case COL_2 :
+								a_keychar= KEYPAD_ROW_2_COLUMN_2;
+								break;
 							
-							case COL_3 :
-							keychar = KEYPAD_ROW_3_COLUMN_3;
-							break;
+								case COL_3 :
+								a_keychar = KEYPAD_ROW_2_COLUMN_3;
+								break;
 							
-						}
+							}
 						
-			break ;
+					  break ;
+						
+						
+						
+						
+					  case ROW_3 :
+						
+						//check the pressed column
+					   switch(a_cols){
+							
+								case COL_0 :
+								a_keychar= KEYPAD_ROW_3_COLUMN_0 ;
+								break;
+							
+								case COL_1 :
+								a_keychar = KEYPAD_ROW_3_COLUMN_1;
+								break;
+							
+								case COL_2 :
+								a_keychar= KEYPAD_ROW_3_COLUMN_2;
+								break;
+							
+								case COL_3 :
+								a_keychar = KEYPAD_ROW_3_COLUMN_3;
+								break;
+							
+							}
+						
+						break ;
 						
 						
 
-						
-			default: 
-			keychar = 0;
-			break;
+					 // no press			
+					default: 
+					a_keychar = 0;
+					break;
 					
 				
-				}	
+						}	
 				
 				
 				}
@@ -169,9 +185,9 @@ uint8_t KEYPAD_getKey(){
 		}
 		
 		
-		DIO_WRITEPIN(rows,HIGH);
+		DIO_WRITEPIN(a_rows,HIGH);
 		
 	}
 	
-	return keychar ;
+	return a_keychar ;
 }
